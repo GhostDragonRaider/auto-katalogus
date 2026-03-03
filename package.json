@@ -1,0 +1,17 @@
+{
+  "name": "auto-katalogus",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "dev": "npm start --prefix client",
+    "client": "npm start --prefix client",
+    "server": "echo \"FastAPI szervert külön kell indítani a venvből\"",
+    "build": "npm run build --prefix client"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "concurrently": "^9.2.1"
+  }
+}
