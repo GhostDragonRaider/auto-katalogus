@@ -8,6 +8,8 @@ import { FavoritesProvider } from './context/FavoritesContext';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
+const basename = process.env.PUBLIC_URL || '/projects/project-3';
+
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
@@ -15,7 +17,7 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <HelmetProvider>
-      <BrowserRouter>
+      <BrowserRouter basename={basename}>
         <LanguageProvider>
           <FavoritesProvider>
         <Global

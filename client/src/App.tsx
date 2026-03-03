@@ -383,7 +383,7 @@ const App: React.FC = () => {
   };
 
   const goToAdminLogin = () => {
-    window.location.href = '/admin/login';
+    navigate('/admin/login');
   };
 
   const closeMenu = () => setMenuOpen(false);
