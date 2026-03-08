@@ -8,7 +8,8 @@ import { FavoritesProvider } from './context/FavoritesContext';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
-const basename = process.env.PUBLIC_URL || '/projects/project-3';
+// Ideiglenes: localhost-on gyökér, production-ben /projects/project-3
+const basename = process.env.NODE_ENV === 'development' ? '/' : (process.env.PUBLIC_URL || '/projects/project-3');
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement

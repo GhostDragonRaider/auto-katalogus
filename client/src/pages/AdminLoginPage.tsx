@@ -113,7 +113,7 @@ const AdminLoginPage: React.FC = () => {
     try {
       setIsSubmitting(true);
       const res = await adminLogin(email, password);
-      localStorage.setItem('nd_admin_token', res.token);
+      sessionStorage.setItem('nd_admin_token', res.token);
       navigate('/admin');
     } catch (err) {
       const msg =

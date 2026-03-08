@@ -409,6 +409,7 @@ def health() -> dict:
 
 @app.get("/api/cars/makes", response_model=List[str])
 def list_makes() -> List[str]:
+    # Csak a kínálatban szereplő autók márkái (egyedi, rendezett)
     makes = sorted({c.make for c in cars_db})
     return makes
 

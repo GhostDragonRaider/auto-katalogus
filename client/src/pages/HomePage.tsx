@@ -215,11 +215,13 @@ const HomePage: React.FC = () => {
     Promise.all([fetchMakes(), fetchColors()])
       .then(([makesData, colorsData]) => {
         if (active) {
-          setMakes(makesData);
-          setColors(colorsData);
+          if (Array.isArray(makesData)) setMakes(makesData);
+          if (Array.isArray(colorsData)) setColors(colorsData);
         }
       })
-      .catch(() => {});
+      .catch(() => {
+        // Fallback: makes-t a később betöltött autókból vesszük
+      });
     return () => {
       active = false;
     };
@@ -234,6 +236,12 @@ const HomePage: React.FC = () => {
         const data = await fetchCars(query);
         if (!active) return;
         setCars(data);
+        // Ha a márkák üresek maradtak (pl. API hiba), az autókból vesszük
+        setMakes((prev) => {
+          if (prev.length > 0) return prev;
+          const fromCars = Array.from(new Set(data.map((c) => c.make))).sort();
+          return fromCars;
+        });
       } catch (err) {
         if (!active) return;
         setError(t('inventory_error'));

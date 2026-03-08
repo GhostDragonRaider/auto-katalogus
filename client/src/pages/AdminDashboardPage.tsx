@@ -75,7 +75,7 @@ const AdminDashboardPage: React.FC = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const stored = localStorage.getItem('nd_admin_token');
+    const stored = sessionStorage.getItem('nd_admin_token');
     if (!stored) {
       navigate('/admin/login');
     } else {
@@ -84,7 +84,7 @@ const AdminDashboardPage: React.FC = () => {
   }, [navigate]);
 
   const logout = () => {
-    localStorage.removeItem('nd_admin_token');
+    sessionStorage.removeItem('nd_admin_token');
     navigate('/admin/login');
   };
 

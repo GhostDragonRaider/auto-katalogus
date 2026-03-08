@@ -386,7 +386,15 @@ const App: React.FC = () => {
     navigate('/admin/login');
   };
 
+  const goToAdminDashboard = () => {
+    navigate('/admin');
+  };
+
   const closeMenu = () => setMenuOpen(false);
+
+  const isAdminRoute = location.pathname.startsWith('/admin');
+  const hasAdminToken =
+    typeof window !== 'undefined' && !!sessionStorage.getItem('nd_admin_token');
 
   const navTo = (fn: () => void) => {
     fn();
@@ -505,9 +513,14 @@ const App: React.FC = () => {
             >
               {t('nav_contact')}
             </NavItem>
-            <NavButton type="button" onClick={() => navTo(goToAdminLogin)}>
-              {t('nav_admin')}
-            </NavButton>
+            {!isAdminRoute && (
+              <NavButton
+                type="button"
+                onClick={() => navTo(hasAdminToken ? goToAdminDashboard : goToAdminLogin)}
+              >
+                {hasAdminToken ? t('nav_admin_dashboard') : t('nav_admin')}
+              </NavButton>
+            )}
             <LangToggle>
               <LangBtn
                 type="button"

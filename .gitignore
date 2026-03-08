@@ -43,3 +43,7 @@ htmlcov/
 
 # Uploads (optional – remove if you want to track uploads)
 # backend/uploads/
+
+# Local credentials (never commit)
+scripts/.env.local
+.deploy-credentials
