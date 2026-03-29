@@ -85,6 +85,7 @@ const AdminDashboardPage: React.FC = () => {
 
   const logout = () => {
     sessionStorage.removeItem('nd_admin_token');
+    window.dispatchEvent(new Event('nd-admin-auth-change'));
     navigate('/admin/login');
   };
 

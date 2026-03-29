@@ -393,8 +393,20 @@ const App: React.FC = () => {
   const closeMenu = () => setMenuOpen(false);
 
   const isAdminRoute = location.pathname.startsWith('/admin');
-  const hasAdminToken =
-    typeof window !== 'undefined' && !!sessionStorage.getItem('nd_admin_token');
+  const [hasAdminToken, setHasAdminToken] = useState(() =>
+    typeof window !== 'undefined' ? !!sessionStorage.getItem('nd_admin_token') : false
+  );
+
+  useEffect(() => {
+    const sync = () => setHasAdminToken(!!sessionStorage.getItem('nd_admin_token'));
+    sync();
+    window.addEventListener('nd-admin-auth-change', sync);
+    window.addEventListener('focus', sync);
+    return () => {
+      window.removeEventListener('nd-admin-auth-change', sync);
+      window.removeEventListener('focus', sync);
+    };
+  }, [location.pathname]);
 
   const navTo = (fn: () => void) => {
     fn();

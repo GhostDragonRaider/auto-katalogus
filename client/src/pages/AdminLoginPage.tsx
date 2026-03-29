@@ -114,6 +114,7 @@ const AdminLoginPage: React.FC = () => {
       setIsSubmitting(true);
       const res = await adminLogin(email, password);
       sessionStorage.setItem('nd_admin_token', res.token);
+      window.dispatchEvent(new Event('nd-admin-auth-change'));
       navigate('/admin');
     } catch (err) {
       const msg =
